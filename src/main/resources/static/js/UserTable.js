@@ -21,9 +21,14 @@ async function loadUsersTable() {
     let userHTML = '';
     let listHTML = '';
     for(const oneUser of UserList){
-      userHTML = `<tr id=${oneUser.id}> <td>${oneUser.id}</td> <td>${oneUser.name} ${oneUser.lastNames}</td> <td>${oneUser.age}</td> <td>${oneUser.phoneNumber}</td> <td>${oneUser.address}</td> <td> <a href='#' class='btn btn-danger btn-circle btn-sm'> <i class='fas fa-trash' title="Delete"></i> </a> </td> </tr>`;
+      const btnDelete = `<a href='#' onclick='deleteUser(${oneUser.id})' class='btn btn-danger btn-circle btn-sm'> <i class='fas fa-trash' title="Delete"></i> </a>`;
+      userHTML = `<tr id=${oneUser.id}> <td>${oneUser.id}</td> <td>${oneUser.name} ${oneUser.lastNames}</td> <td>${oneUser.age}</td> <td>${oneUser.phoneNumber}</td> <td>${oneUser.address}</td> <td> ${btnDelete} </td> </tr>`;
       listHTML += userHTML;
     }
 
     document.querySelector("#usersData tbody").outerHTML = listHTML;
+}
+
+function deleteUser(id){
+  console.log(id);
 }

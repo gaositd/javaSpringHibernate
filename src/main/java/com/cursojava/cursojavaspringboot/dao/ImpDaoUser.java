@@ -1,26 +1,30 @@
 package com.cursojava.cursojavaspringboot.dao;
 
 import com.cursojava.cursojavaspringboot.models.UsersDataTemp;
-
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository
 @Transactional
-/*
-para poder usar @Transactional es necesario tener en el PON.XML lo siguinte
-<dependency>
-    <groupId>org.springframework</groupId>
-    <artifactId>spring-tx</artifactId>
-    <version>5.3.29</version>
-</dependency>
-de no tener esto ni a patadas funciona
-* */
-public class ImpDaoUser implements /*tomara un interface*/ DaoUser/*lo que este en la interface es obligatorio*/{
+//@EntityScan("com.server.models")
+
+public class ImpDaoUser implements /*tomará un interface*/ DaoUser/*lo que este en la interface es obligatorio*/{
+    @PersistenceContext
+    private EntityManager entityManager;
     @Override
     public List<UsersDataTemp> getAllUsers() {
-        return null;
+        String qry = "From users";
+
+        return  entityManager.createQuery(qry).getResultList();
     }
+
+    @Override
+    public void deleteUser(Long id) {
+        UsersDataTemp userDeleted = entityManager.find(UsersDataTemp.class, id);
+        entityManager.remove(userDeleted);
+    }
+
 }

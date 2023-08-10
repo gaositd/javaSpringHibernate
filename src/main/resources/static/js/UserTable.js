@@ -24,7 +24,7 @@ async function loadUsersTable() {
     for(const oneUser of UserList){
       const btnDelete = `<a href='#' onclick='deleteUser(${oneUser.id})' class='btn btn-danger btn-circle btn-sm'> <i class='fas fa-trash' title="Delete"></i> </a>`;
       const btnUpdate = `<a href='register.html?id=${oneUser.id}' class='btn btn-success btn-circle btn-sm'> <i class="fas fa-edit"  title="Update"></i> </a>`;
-      userHTML = `<tr id=${oneUser.id}> <td>${oneUser.id}</td> <td>${oneUser.name} ${oneUser.lastNames}</td> <td>${oneUser.age}</td> <td>${oneUser.phoneNumber}</td> <td>${oneUser.address}</td> <td> ${btnDelete} ${btnUpdate}</td> </tr>`;
+      userHTML = `<tr id=${oneUser.id}> <td>${oneUser.id}</td> <td>${oneUser.names} ${oneUser.lastNames}</td> <td>${oneUser.age}</td> <td>${oneUser.email}</td> <td>${oneUser.phoneNumber}</td> <td>${oneUser.address}</td> <td> ${btnDelete} ${btnUpdate}</td> </tr>`;
       listHTML += userHTML;
     }
 

@@ -2,12 +2,12 @@ package com.cursojava.cursojavaspringboot.controllers;
 
 import com.cursojava.cursojavaspringboot.dao.DaoUser;
 import com.cursojava.cursojavaspringboot.models.UsersDataTemp;
+import de.mkammerer.argon2.Argon2;
+import de.mkammerer.argon2.Argon2Factory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,6 +27,12 @@ public class UserController{
         return List.of("Daniela Iveth Meraz Silva", "Daniela Iveth Meraz Silva", "Alvaro Gamez Chavez");
     }
 
+
+    /*@RequestMapping(value = "/user/login/{user}/{password}")
+    public UsersDataTemp getLogin(@PathVariable String user, String password){
+        return null;
+    }*/
+
     @RequestMapping(value = "/user/oneUser/{id}")
     public UsersDataTemp getUser(@PathVariable Long id){
         return null;
@@ -35,6 +41,17 @@ public class UserController{
     @RequestMapping(value = "/user/allUsers")
     public List<UsersDataTemp> getAllUsers(){
         return daoUser.getAllUsers();
+    }
+
+    @RequestMapping(value = "/user/registerUser", method = RequestMethod.POST)
+    public void registerUsers(@RequestBody UsersDataTemp usersDataTemp){
+        //final byte longMax = 30;//si se aplica esta parte para quitar lo "inutil", falla al verificar el password >:(
+        Argon2 agon2 = Argon2Factory.create(Argon2Factory.Argon2Types.ARGON2id);//Para crear hash del password
+        String password = usersDataTemp.getPassword();//toma el password
+        String hash = agon2.hash(1, 1024, 1, password, Charset.defaultCharset());//crea el hash en base al password
+        //hash = hash.substring(longMax);//quita los caracteres innecesarios del hash
+        usersDataTemp.setPassword(hash);//setea el password con el hash
+        daoUser.registerUser(usersDataTemp);//con esta instrucción guarda en la BD
     }
 
     @RequestMapping(value = "/user/updateUser")

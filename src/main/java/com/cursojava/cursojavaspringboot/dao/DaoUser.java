@@ -9,8 +9,10 @@ public interface DaoUser {
 
     void deleteUser(Long id);
 
+    void registerUser(UsersDataTemp usersDataTemp);
 
-    //UsersDataTemp getUser(Long id);
+
+    boolean checkCredentials(UsersDataTemp usersDataTemp);
 
 
 }

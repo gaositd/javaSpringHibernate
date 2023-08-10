@@ -16,22 +16,23 @@ import lombok.ToString;
 
 import javax.persistence.*;
 
-//import javax.persistence.*;
-
 @Entity(name = "users")//anotación para hacer referencia a la BD
 @Table(name = "users")//nombre que tomará para hacer consultas, puede ser cambiado
 @ToString
 public class UsersDataTemp {
-
+//los campos de la base de datos deben estar aquí, el mismo orden de los campos debe estar en la BD y este archivo
     @Id//indica que es la llave primaria
     @Getter @Setter @Column(name = "id")//en este punto no se columnas traer con la anotación @colum indicamos cual es
     private Long id;
 
     @Getter @Setter @Column(name = "names")
-    private String name;
+    private String names;
 
     @Getter @Setter @Column(name = "lastnames")
     private String lastNames;
+
+    @Getter @Setter @Column(name = "email")
+    private String email;
 
     @Getter @Setter @Column(name = "address")
     private String address;
@@ -41,4 +42,7 @@ public class UsersDataTemp {
 
     @Getter @Setter @Column(name = "phonenumber")
     private String phoneNumber;
+
+    @Getter @Setter @Column(name = "password")
+    private  String password;
 }

@@ -23,8 +23,8 @@ public class JWTUtils {
     @Value("${security.jwt.ttlMillis}")
     private long ttlMillis;
 
-    /*private final Logger log = LoggerFactory
-            .getLogger(JWTUtil.class); corregir esta linea YAAAAAAAAAAAAAAAAAAAAAA*/
+    private final Logger log = LoggerFactory
+            .getLogger(JWTUtil.class);
 
     /**
      * Create a new token.

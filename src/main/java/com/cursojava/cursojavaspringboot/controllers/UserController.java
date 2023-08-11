@@ -2,6 +2,7 @@ package com.cursojava.cursojavaspringboot.controllers;
 
 import com.cursojava.cursojavaspringboot.dao.DaoUser;
 import com.cursojava.cursojavaspringboot.models.UsersDataTemp;
+import com.cursojava.cursojavaspringboot.utils.JWTUtils;
 import de.mkammerer.argon2.Argon2;
 import de.mkammerer.argon2.Argon2Factory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,9 @@ import java.util.List;
 public class UserController{
     @Autowired
     private DaoUser daoUser;
-    @RequestMapping(value = "/test")
+    @Autowired
+    private JWTUtils jwtUtils;
+    /*@RequestMapping(value = "/test")
     public String test(){
         return "test";
     }
@@ -26,20 +29,22 @@ public class UserController{
 
         return List.of("Daniela Iveth Meraz Silva", "Daniela Iveth Meraz Silva", "Alvaro Gamez Chavez");
     }
-
-
-    /*@RequestMapping(value = "/user/login/{user}/{password}")
-    public UsersDataTemp getLogin(@PathVariable String user, String password){
-        return null;
-    }*/
-
     @RequestMapping(value = "/user/oneUser/{id}")
     public UsersDataTemp getUser(@PathVariable Long id){
         return null;
+    }*/
+
+    private boolean validateToken(String token){
+        String userId = jwtUtils.getKey(token);
+
+        return userId != null;
     }
 
     @RequestMapping(value = "/user/allUsers")
-    public List<UsersDataTemp> getAllUsers(){
+    public List<UsersDataTemp> getAllUsers(@RequestHeader(value = "Authorization") String token){
+        if(!validateToken(token)){
+            return null;
+        }
         return daoUser.getAllUsers();
     }
 
@@ -61,9 +66,11 @@ public class UserController{
     }
 
     @RequestMapping(value = "/user/oneUser/{id}", method = RequestMethod.DELETE)
-    public String deleteUser(@PathVariable Long id){
+    public String deleteUser(@RequestHeader(value = "Authorization") String token, @PathVariable Long id){
         daoUser.deleteUser(id);
-
+        if(!validateToken(token)){
+            return null;
+        }
         return "User Deleted";
     }
 }

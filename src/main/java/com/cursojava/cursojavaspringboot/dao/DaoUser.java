@@ -12,7 +12,7 @@ public interface DaoUser {
     void registerUser(UsersDataTemp usersDataTemp);
 
 
-    boolean checkCredentials(UsersDataTemp usersDataTemp);
+    UsersDataTemp getUserByCredentials(UsersDataTemp usersDataTemp);
 
 
 }

@@ -29,8 +29,10 @@ async function startSession() {
   // const response = await requestUser.json();
   const response = await requestUser.text();
   console.log(response);
-  if(response === 'OK'){
-    window.location.href = "Users.html";
+  if(response !== 'FAIL'){
+    localStorage.token = response;
+    localStorage.email = data.email;
+    window.location.href = "users.html";
   }else{
     alert("check your credentials and try again");
   }

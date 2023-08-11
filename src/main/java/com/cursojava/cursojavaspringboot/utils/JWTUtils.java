@@ -7,13 +7,19 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import javax.crypto.spec.SecretKeySpec;
 import javax.xml.bind.DatatypeConverter;
 import java.security.Key;
 import java.util.Date;
 
+/**
+ * @author Mahesh
+ */
+@Component
 public class JWTUtils {
+    //las 3 variables de abajo @Value seran agregadas al application.properties
     @Value("${security.jwt.secret}")
     private String key;
 
@@ -22,9 +28,9 @@ public class JWTUtils {
 
     @Value("${security.jwt.ttlMillis}")
     private long ttlMillis;
-
+    //las 3 variables de arriba @Value seran agregadas al application.properties
     private final Logger log = LoggerFactory
-            .getLogger(JWTUtil.class);
+            .getLogger(JWTUtils.class);
 
     /**
      * Create a new token.

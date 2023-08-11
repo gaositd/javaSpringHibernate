@@ -36,24 +36,26 @@ public class ImpDaoUser implements /*tomará un interface*/ DaoUser/*lo que este
     }
 
     @Override
-    public boolean checkCredentials(UsersDataTemp usersDataTemp ){
-        String qry = "From users Where email= :email";// and password= :password";
+    public UsersDataTemp getUserByCredentials(UsersDataTemp usersDataTemp ){
+        String qry = "From users Where email= :email";
         Argon2 argon2 = Argon2Factory.create(Argon2Factory.Argon2Types.ARGON2id);
         String passwordHassed = null;
         boolean boolArgon2;
 
-        List<UsersDataTemp> lista = entityManager
-            .createQuery(qry)
+        List<UsersDataTemp> list = entityManager.createQuery(qry)
             .setParameter("email", usersDataTemp.getEmail())
-            //.setParameter("password", usersDataTemp.getPassword())
             .getResultList();
 
-        if(!lista.isEmpty()){
-            passwordHassed = lista.get(0).getPassword();
-            boolArgon2 = argon2.verify(passwordHassed,usersDataTemp.getPassword());
-            return  boolArgon2;
+        passwordHassed = list.get(0).getPassword();
+
+        if(!list.isEmpty()){
+            if(argon2.verify(passwordHassed,usersDataTemp.getPassword())) {
+                return list.get(0);
+            }
+            return null;
         }else{
-            return false;
+            //return list;
+            return null;
         }
     }
 

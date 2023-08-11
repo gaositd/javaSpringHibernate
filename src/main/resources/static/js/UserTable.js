@@ -4,18 +4,20 @@ $(document).ready(function() {
   $('#usersData').DataTable();
 });
 
+const getHeaders = () => {
+  return {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
+    'Authorization': localStorage.token,
+  }
+};
 
 async function loadUsersTable() {
-  //const urlApi = "https://jsonplaceholder.typicode.com/users";
-  //const urlApi = "/user/oneUser/1";//solo toma un usuario por ID
+
   const urlApi = "/user/allUsers";
     const requestUser = await fetch(urlApi,{
       method:'GET',
-      headers:{
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }/*,
-      body: JSON.stringify(requestUser), se usa en post y cosas de esas*/
+      headers:getHeaders()
     });
     const UserList = await requestUser.json();
 
@@ -29,6 +31,7 @@ async function loadUsersTable() {
     }
 
     document.querySelector("#usersData tbody").outerHTML = listHTML;
+    document.getElementById("userMail").innerHTML = localStorage.email;
 }
 
 async function deleteUser(id){
@@ -40,10 +43,7 @@ async function deleteUser(id){
   try {
     const requestUser = await fetch(urlApi,{
       method:'DELETE',
-      headers:{
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }
+      headers: getHeaders(),
       
     })}catch(err){
       console.error(err);

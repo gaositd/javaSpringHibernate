@@ -1,5 +1,9 @@
 package com.cursojava.cursojavaspringboot.utils;
 
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtBuilder;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -19,8 +23,8 @@ public class JWTUtils {
     @Value("${security.jwt.ttlMillis}")
     private long ttlMillis;
 
-    private final Logger log = LoggerFactory
-            .getLogger(JWTUtil.class);
+    /*private final Logger log = LoggerFactory
+            .getLogger(JWTUtil.class); corregir esta linea YAAAAAAAAAAAAAAAAAAAAAA*/
 
     /**
      * Create a new token.

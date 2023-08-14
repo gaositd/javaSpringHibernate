@@ -11,6 +11,9 @@ public interface DaoUser {
 
     void registerUser(UsersDataTemp usersDataTemp);
 
+    public UsersDataTemp getUser(Long id);
+
+    public boolean updateUser( UsersDataTemp usersDataTemp);
 
     UsersDataTemp getUserByCredentials(UsersDataTemp usersDataTemp);
 

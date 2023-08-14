@@ -28,11 +28,12 @@ public class UserController{
         List<String> names = new ArrayList<>();
 
         return List.of("Daniela Iveth Meraz Silva", "Daniela Iveth Meraz Silva", "Alvaro Gamez Chavez");
-    }
-    @RequestMapping(value = "/user/oneUser/{id}")
-    public UsersDataTemp getUser(@PathVariable Long id){
-        return null;
     }*/
+    @RequestMapping(value = "/users/getUser/{id}")
+    public UsersDataTemp getUser(@PathVariable Long id){
+        UsersDataTemp users = new UsersDataTemp();
+        return daoUser.getUser(id);
+    }
 
     private boolean validateToken(String token){
         String userId = jwtUtils.getKey(token);
@@ -59,10 +60,12 @@ public class UserController{
         daoUser.registerUser(usersDataTemp);//con esta instrucción guarda en la BD
     }
 
-    @RequestMapping(value = "/user/updateUser")
-    public UsersDataTemp updateUser(){
-        UsersDataTemp user = new UsersDataTemp();
-        return user;
+    @RequestMapping(value = "/user/updateUser/{user}")
+    public boolean updateUser(@RequestBody UsersDataTemp usersDataTemp){
+
+        System.out.println("Dotos llegando = " + usersDataTemp);
+        daoUser.updateUser(usersDataTemp);
+        return false;
     }
 
     @RequestMapping(value = "/user/oneUser/{id}", method = RequestMethod.DELETE)

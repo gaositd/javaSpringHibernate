@@ -1,7 +1,7 @@
 package com.cursojava.cursojavaspringboot.javaPuro.clase30.poo;
 
 public class Clase30 {
-//coche https://www.youtube.com/watch?v=ZY5pwm92cWQ&list=PLU8oAlHdN5BktAXdEVCLUYzvDyqRQJ2lk&index=34
+//coche https://www.youtube.com/watch?v=l8NmSp7Dz-0&list=PLU8oAlHdN5BktAXdEVCLUYzvDyqRQJ2lk&index=36
     private String marcaModelo;
     private int ruedas;
     private int largo;
@@ -10,7 +10,8 @@ public class Clase30 {
     private int pesoPlataforma;
     private String color;
     private int pesoTotal;
-    private boolean asientosCuero;
+    private boolean asientosCuero, climatizado;
+    private double precioTotal;
 
     public Clase30(){
         marcaModelo ="Renult alfaRomeo 2023";
@@ -19,6 +20,7 @@ public class Clase30 {
         ancho = 300;
         motor = 1600;
         pesoPlataforma = 500;
+        climatizado = false;
     }
 
     public Clase30(
@@ -30,7 +32,9 @@ public class Clase30 {
             int PesoPlataforma,
             String Color,
             int PesoTotal,
-            boolean AsientosCuero
+            boolean AsientosCuero,
+            boolean Climatizado,
+            double PrecioTotal
     ){
         this.marcaModelo = MarcaModelo;
         this.ruedas = Ruedas;
@@ -41,6 +45,8 @@ public class Clase30 {
         this.color = Color;
         this.pesoTotal = PesoTotal;
         this.asientosCuero = AsientosCuero;
+        this.climatizado = Climatizado;
+        this.precioTotal = PrecioTotal;
     }
 
     public String getMarcaModelo() {
@@ -119,6 +125,22 @@ public class Clase30 {
 
     public void setAsientosCuero(boolean asientosCuero) {
         this.asientosCuero = asientosCuero;
+    }
+
+    public boolean isClimatizado() {
+        return climatizado;
+    }
+
+    public void setClimatizado(boolean climatizado) {
+        this.climatizado = climatizado;
+    }
+
+    public double getPrecioTotal() {
+        return precioTotal;
+    }
+
+    public void setPrecioTotal(double precioTotal) {
+        this.precioTotal = precioTotal;
     }
 
     @Override
